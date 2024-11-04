@@ -149,16 +149,14 @@ class LoginFrame(wx.Frame):
             response.raise_for_status()  # 如果响应状态码不是 200，将抛出异常
 
             # 从响应内容中提取 JSON 数据
-            json_str = response.text[7:-1]  # 去掉 'liejiu(' 和 ')'
+            json_str = response.text[7:-2]  # 去掉 'liejiu(' 和 ')'
             data = json.loads(json_str)  # 将 JSON 字符串转换为 Python 字典
 
             # 根据返回的状态码进行处理
-            if data.get('result') == 1:
-                wx.MessageBox("登录成功: " + data.get('msg', ''), "成功", wx.OK | wx.ICON_INFORMATION)
-            elif data.get('result') == 0:
-                wx.MessageBox("登录失败: " + data.get('msg', '未知错误'), "失败", wx.OK | wx.ICON_ERROR)
+            if data.get("result") == 1:
+                wx.MessageBox("登录成功", "成功", wx.OK | wx.ICON_INFORMATION)
             else:
-                wx.MessageBox("未知响应", "错误", wx.OK | wx.ICON_ERROR)
+                wx.MessageBox(data.get("msg"), "错误", wx.OK | wx.ICON_ERROR)
         except requests.RequestException as e:
             wx.MessageBox("请求失败: 请检查网络连接", "错误", wx.OK | wx.ICON_ERROR)
 
@@ -172,16 +170,14 @@ class LoginFrame(wx.Frame):
             response.raise_for_status()  # 如果响应状态码不是 200，将抛出异常
 
             # 从响应内容中提取 JSON 数据
-            json_str = response.text[7:-1]  # 去掉 'liejiu(' 和 ')'
+            json_str = response.text[7:-2]  # 去掉 'liejiu(' 和 ')'
             data = json.loads(json_str)  # 将 JSON 字符串转换为 Python 字典
 
             # 根据返回的状态码进行处理
             if data.get('result') == 1:
-                wx.MessageBox("注销成功: " + data.get('msg', ''), "成功", wx.OK | wx.ICON_INFORMATION)
-            elif data.get('result') == 0:
-                wx.MessageBox("注销失败: " + data.get('msg', '未知错误'), "失败", wx.OK | wx.ICON_ERROR)
+                wx.MessageBox("注销成功", "成功", wx.OK | wx.ICON_INFORMATION)
             else:
-                wx.MessageBox("未知响应", "错误", wx.OK | wx.ICON_ERROR)
+                wx.MessageBox(data.get("msg"), "错误", wx.OK | wx.ICON_ERROR)
         except requests.RequestException as e:
             wx.MessageBox("请求失败: 请检查网络连接或URL是否正确。", "错误", wx.OK | wx.ICON_ERROR)
 
