@@ -73,7 +73,7 @@ class LoginFrame(wx.Frame):
         vbox.Layout()  # 布局垂直盒子
         panel.Fit()  # 调整面板大小以适应内容
         self.Centre()  # 居中窗口
-        self.SetTitle("校园网登陆系统")
+        self.SetTitle("校园网登陆GUI")
         self.LoadCredentials()
 
     def LoadCredentials(self):
